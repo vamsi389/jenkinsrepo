@@ -7,5 +7,11 @@ stages {
       echo "Hello World"
     }
   }
+
+  stage('Build'){
+    steps {
+      ls -ltrh
+    }
+  }
 }
 }
