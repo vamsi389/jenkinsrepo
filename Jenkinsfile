@@ -10,7 +10,7 @@ stages {
 
   stage('Build'){
     steps {
-      ls -ltrh
+      sh 'ls -ltrh'
     }
   }
 }
