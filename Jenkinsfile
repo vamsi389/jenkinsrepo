@@ -5,7 +5,7 @@ pipeline {
     stage('Test') {
       steps {
         echo "Welcome to Jenkins"
-        echo "$((whoami))"
+        sh 'echo "$(whoami)"'
       }
     }
     stage('Build') {
