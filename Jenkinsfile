@@ -5,7 +5,7 @@ pipeline {
     stage('Test') {
       steps {
         echo "Welcome to Jenkins"
-        echo "$(whoami)"
+        echo "$((whoami))"
       }
     }
     stage('Build') {
@@ -15,3 +15,4 @@ pipeline {
     }
   }
 }
+(
