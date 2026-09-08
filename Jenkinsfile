@@ -10,7 +10,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'touch /home/ubuntu/jenkins.txt'
+        sh 'sudo touch /home/ubuntu/jenkins.txt'
       }
     }
   }
