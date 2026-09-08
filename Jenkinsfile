@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    APP_NAME = my-first-app
+    APP_NAME = 'my-first-app'
   }
   stages{
     stage('Test') {
