@@ -4,6 +4,14 @@ pipeline {
   environment {
     APP_NAME = 'my-first-app'
   }
+
+  parameters {
+      choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'test', 'prod'],
+            description: 'Select deployment environment'
+      )
+    }
   stages{
     stage('Test') {
       steps {
