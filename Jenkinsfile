@@ -5,6 +5,12 @@ pipeline {
     stage('Test') {
       steps {
         echo "Welcome to Jenkins"
+        echo "$(whoami)"
+      }
+    }
+    stage('Build') {
+      steps {
+        sh 'touch /home/ubuntu/jenkins.txt
       }
     }
   }
