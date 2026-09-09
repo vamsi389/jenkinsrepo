@@ -6,17 +6,34 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Verify') {
+        stage('Install Dependencies') {
             steps {
-                sh 'pwd'
-                sh 'ls -la'
-                sh 'git log -1 --oneline'
+                sh 'python3 -m pip install -r requirements.txt'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'python3 -m pytest -v'
+            }
+        }
+
+        stage('Build Artifact') {
+            steps {
+                sh 'tar -czf myapp-${BUILD_NUMBER}.tar.gz app.py'
+            }
+        }
+
+        stage('Archive Artifact') {
+            steps {
+                archiveArtifacts artifacts: '*.tar.gz'
             }
         }
     }
