@@ -13,16 +13,21 @@ pipeline {
             }
         }
 
+        stage('Create Virtual Environment') {
+            steps {
+                sh 'python3 -m venv .venv'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                sh 'sudo apt-get update'
-                sh 'sudo python3 -m pip install -r requirements.txt'
+                sh '.venv/bin/pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'python3 -m pytest -v'
+                sh '.venv/bin/python -m pytest -v'
             }
         }
 
