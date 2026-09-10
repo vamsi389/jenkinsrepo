@@ -7,80 +7,31 @@ pipeline {
 
     parameters {
         choice(
-            name: 'ENVIRONMENT',
-            choices: ['dev', 'test', 'prod'],
-            description: 'Select deployment environment'
+            name: 'Environment'
+            choices: ['Dev','Prod','stage']
+            description: 'Select the target environment for deployment'
         )
     }
 
     environment {
-        APP_NAME = 'my-first-app'
+        APP_NAME = payment-api
     }
 
-    stages {
-
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Create Virtual Environment') {
-            steps {
-                sh 'python3 -m venv .venv'
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                sh '.venv/bin/pip install -r requirements.txt'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh '.venv/bin/python -m pytest -v'
-            }
-        }
-
-        stage('Credential Test') {
-            steps {
-                withCredentials([
-                    string(
-                        credentialsId: 'day5-demo-token',
-                        variable: 'API_TOKEN'
-                    )
-                ]) {
-                    sh '''
-                        if [ -n "$API_TOKEN" ]; then
-                            echo "Credential loaded successfully"
-                        else
-                            echo "Credential missing"
-                            exit 1
-                        fi
-                    '''
-                }
-            }
-        }
-
-        stage('Build Artifact') {
-            steps {
-                sh 'tar -czf ${APP_NAME}-${BUILD_NUMBER}.tar.gz app.py'
-            }
-        }
-
-        stage('Archive Artifact') {
-            steps {
-                archiveArtifacts artifacts: '*.tar.gz'
-            }
-        }
-
-        stage('Summary') {
-            steps {
-                echo "Application: ${env.APP_NAME}"
-                echo "Environment: ${params.ENVIRONMENT}"
-                echo "Build Number: ${env.BUILD_NUMBER}"
-            }
+stages {
+    stage('Test') {
+        steps {
+            sh 'pwd'
+            sh 'sudo ls -ltrh'
+            sh 'sudo git log -1'
         }
     }
-}
+
+    stage('Build') {
+        steps {
+            sh 'sudo python3 -m venv .venv'
+            sh 'sudo source .venv/bin/activate'
+            sh 'sudo pip install -r requirements.txt'
+            sh 'pytest test_app.py'
+        }
+    }
+        
