@@ -34,4 +34,6 @@ stages {
             sh 'pytest test_app.py'
         }
     }
+}
+}
         
