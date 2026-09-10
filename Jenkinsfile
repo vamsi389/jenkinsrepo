@@ -45,6 +45,23 @@ stages {
         }
     }
 
+    stage('Build Artifact') {
+        steps {
+            sh '''
+                echo "PWD:"
+                pwd
+
+                echo "Before tar:"
+                ls -ltrh
+
+                tar -czf payment-api-${BUILD_NUMBER}.tar.gz app.py
+
+                echo "After tar:"
+                ls -ltrh
+            '''
+        }
+    }
+
     stage('Archive Artifact') {
       steps {
         archiveArtifacts artifacts: '*.tar.gz'
