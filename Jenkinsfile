@@ -48,7 +48,7 @@ stages {
 
 post {
     always {
-        archiveArtifacts artifacts
+        archiveArtifacts artifacts: '*.tar.gz', allowEmptyArchive: true
     }
 }
 }
