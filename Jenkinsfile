@@ -14,7 +14,7 @@ pipeline {
     }
 
     environment {
-        APP_NAME = payment-api
+        APP_NAME = 'payment-api'
     }
 
 stages {
