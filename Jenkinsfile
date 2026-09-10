@@ -36,8 +36,8 @@ stages {
     stage('Build') {
         steps {
             sh 'sudo python3 -m venv .venv'
-            sh 'sudo source .venv/bin/activate'
-            sh 'sudo pip install -r requirements.txt'
+            sh '.venv/bin/pip install -r requirements.txt''
+            sh '.venv/bin/python -m pytest -v'
             sh 'pytest test_app.py'
         }
     }
