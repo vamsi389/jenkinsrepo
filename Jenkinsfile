@@ -45,5 +45,11 @@ stages {
         }
     }
 }
+
+post {
+    always {
+        archiveArtifacts artifacts
+    }
+}
 }
         
