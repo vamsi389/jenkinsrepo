@@ -15,6 +15,7 @@ pipeline {
 
     environment {
         APP_NAME = 'payment-api'
+        MY_SECRET = credentials('day5-demo-token')
     }
 
 stages {
@@ -40,6 +41,7 @@ stages {
             sh '.venv/bin/pip install -r requirements.txt'
             sh '.venv/bin/python -m pytest -v'
             sh '.venv/bin/python -m pytest test_app.py -v'
+            sh 'echo "$MY_SECRET"'
         }
     }
 }
