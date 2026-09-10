@@ -20,9 +20,9 @@ pipeline {
 stages {
 
     stage('Checkout') {
-    steps {
+        steps {
         checkout scm
-    }
+        }
     }
     
     stage('Test') {
@@ -36,7 +36,7 @@ stages {
     stage('Build') {
         steps {
             sh 'sudo rm -rf .venv'
-            sh 'sudo python3 -m venv .venv'
+            sh 'python3 -m venv .venv'
             sh '.venv/bin/pip install -r requirements.txt'
             sh '.venv/bin/python -m pytest -v'
             sh 'pytest test_app.py'
