@@ -44,12 +44,13 @@ stages {
             sh 'echo "$MY_SECRET"'
         }
     }
-}
 
-post {
-    always {
-        archiveArtifacts artifacts: '*.tar.gz', allowEmptyArchive: true
+    stage('Archive Artifact') {
+      steps {
+        archiveArtifacts artifacts: '*.tar.gz'
+    }
     }
 }
+
 }
         
